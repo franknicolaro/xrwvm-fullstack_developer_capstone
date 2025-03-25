@@ -124,3 +124,27 @@ img{
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
 }
+
+.line{
+    width: 85%;
+    height:5%;
+    border-bottom:1px solid black;
+    position: absolute;
+}
+
+.vertline{
+    height: 400px;
+    border-left:2px solid black;
+    flex-direction: column;
+}
+
+.contactheader{
+    color: darkturquoise;
+    font-weight: bold;
+    text-align: center;
+}
+
+.contactinfo{
+    color: darkturquoise;
+    text-align: center;
+}
