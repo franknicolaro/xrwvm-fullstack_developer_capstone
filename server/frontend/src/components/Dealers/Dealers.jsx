@@ -30,8 +30,10 @@ const Dealers = () => {
     const res = await fetch(dealer_url, {
       method: "GET"
     });
+    console.log('Raw response: ', res)
     const retobj = await res.json();
     if(retobj.status === 200) {
+        console.log('Return object: ', retobj)
       let all_dealers = Array.from(retobj.dealers)
       let states = [];
       all_dealers.forEach((dealer)=>{

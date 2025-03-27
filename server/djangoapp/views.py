@@ -102,7 +102,7 @@ def get_dealer_reviews(request,dealer_id):
         dealer_reviews = get_request("/fetchReviews/dealer/"+str(dealer_id))
         for review in dealer_reviews:
             review["sentiment"] = analyze_review_sentiments(review["review"])['sentiment']
-        return JsonResponse({"status": 200, "dealer_reviews": dealer_reviews}) 
+        return JsonResponse({"status": 200, "reviews": dealer_reviews}) 
     else:
         error = "Error fetching dealer reviews"
         return JsonResponse({"status":403, "error": error})
@@ -112,14 +112,16 @@ def get_dealer_reviews(request,dealer_id):
 def get_dealer_details(request, dealer_id):
     if(dealer_id):
         dealer_details = get_request("/fetchDealer/"+str(dealer_id))
-        return JsonResponse({"status": 200, "dealer_details": dealer_details})
+        return JsonResponse({"status": 200, "dealer": dealer_details})
     else:
         error = "Error fetching dealer details."
         return JsonResponse({"status":403, "error": error})
 # Create a `add_review` view to submit a review
 def add_review(request):
+    print(request.user.is_anonymous)
     if(request.user.is_anonymous == False):
         data = json.loads(request.body)
+        logger.debug(str(data))
         try:
             response = post_review(data)
             return JsonResponse({"status":200})
