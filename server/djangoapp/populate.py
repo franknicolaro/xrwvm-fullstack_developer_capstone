@@ -126,6 +126,6 @@ def initiate():
     for data in car_model_data:
         name = data['name']
         make = data['car_make']
-        type =d ata['type']
+        type = data['type']
         year = data['year']
         CarModel.objects.create(name=name, car_make=make, type=type, year=year)
