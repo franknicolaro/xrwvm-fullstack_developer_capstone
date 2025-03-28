@@ -44,11 +44,11 @@ class CarModel(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=15, choices=TYPE_LIST, default='SEDAN')
     year = models.IntegerField(default=2023,
-                                validators=[
-                                    MaxValueValidator(2025),
-                                    MinValueValidator(2015)
-                                ]
-                            )
+                            validators=[
+                                MaxValueValidator(2025),
+                                MinValueValidator(2015)
+                            ]
+                        )
 
     def __str__(self):
         return self.name + ", " + self.type
