@@ -21,9 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # I would not wish doing this on my worst enemy. Shame on whoever
 # thought linting was a good idea.
 PROXY = 'proxy.cognitiveclass.ai'
-USER = 'https://franknicolaro-8000'
+USER = 'https://franknicolar-8000'
 HOST_URL1 = USER+'.theianext-1-labs-prod-misc-tools-us-east-0.'+PROXY
-HOST_URL2 = USER+'.theiadockernext-1-labs-prod-theiak8s-4-tor01.'+PROXY
+HOST_URL2 = USER+'.theiadockernext-0-labs-prod-theiak8s-4-tor01.'+PROXY
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
