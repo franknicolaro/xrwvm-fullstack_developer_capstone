@@ -17,8 +17,13 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-HOST_URL1 = 'https://franknicolar-8000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai'
-HOST_URL2 = 'https://franknicolar-8000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai'
+
+# I would not wish doing this on my worst enemy. Shame on whoever
+# thought linting was a good idea.
+PROXY = 'proxy.cognitiveclass.ai'
+USER = 'https://franknicolaro-8000'
+HOST_URL1 = USER+'.theianext-1-labs-prod-misc-tools-us-east-0.'+PROXY
+HOST_URL2 = USER+'.theiadockernext-1-labs-prod-theiak8s-4-tor01.'+PROXY
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -93,22 +98,23 @@ DATABASES = {
     }
 }
 
+AUTH_SUB = 'django.contrib.auth'
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME':
-        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        AUTH_SUB+'.password_validation.UserAttributeSimilarityValidator',
     },
     {
         'NAME':
-        'django.contrib.auth.password_validation.MinimumLengthValidator',
+        AUTH_SUB+'.password_validation.MinimumLengthValidator',
     },
     {
         'NAME':
-        'django.contrib.auth.password_validation.CommonPasswordValidator',
+        AUTH_SUB+'.password_validation.CommonPasswordValidator',
     },
     {
         'NAME':
-        'django.contrib.auth.password_validation.NumericPasswordValidator',
+        AUTH_SUB+'.password_validation.NumericPasswordValidator',
     },
 ]
 
