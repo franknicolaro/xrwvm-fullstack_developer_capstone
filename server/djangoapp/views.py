@@ -54,7 +54,6 @@ def registration(request):
     last_name = data['lastName']
     email = data['email']
     username_exist = False
-    email_exist = False
 
     try:
         User.objects.get(username=username)
@@ -62,9 +61,12 @@ def registration(request):
     except Exception as e:
         print(f"Error: {e}")
         logger.debug("{} is a new user".format(username))
-    
+
     if not username_exist:
-        user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, password=password, email=email)
+        user = User.objects.create_user(username=username, 
+                                        first_name=first_name, 
+                                        last_name=last_name, 
+                                        password=password, email=email)
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
         return JsonResponse(data)
@@ -80,9 +82,9 @@ def get_cars(request):
     car_models = CarModel.objects.select_related('car_make')
     cars = []
     for car_model in car_models:
-        cars.append({"CarModel": car_model.name, 
+        cars.append({"CarModel": car_model.name,
                      "CarMake": car_model.car_make.name})
-    return JsonResponse({"CarModels":cars})
+    return JsonResponse({"CarModels": cars})
 
 
 # # Update the `get_dealerships` view to render the index page with
@@ -94,7 +96,7 @@ def get_dealerships(request, state="All"):
     else:
         endpoint = "/fetchDealers/"+state
     dealers = get_request(endpoint)
-    return JsonResponse({"status":200, "dealers":dealers})
+    return JsonResponse({"status": 200, "dealers": dealers})
 
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
@@ -103,7 +105,7 @@ def get_dealer_reviews(request, dealer_id):
         dealer_reviews = get_request("/fetchReviews/dealer/"+str(dealer_id))
         for review in dealer_reviews:
             sentiment_map = analyze_review_sentiments(review["review"])
-            review["sentiment"] = seintiment_map['sentiment']
+            review["sentiment"] = sentiment_map['sentiment']
         return JsonResponse({"status": 200, "reviews": dealer_reviews})
     else:
         error = "Error fetching dealer reviews"
@@ -117,7 +119,7 @@ def get_dealer_details(request, dealer_id):
         return JsonResponse({"status": 200, "dealer": dealer_details})
     else:
         error = "Error fetching dealer details."
-        return JsonResponse({"status":403, "error": error})
+        return JsonResponse({"status": 403, "error": error})
 
 
 # Create a `add_review` view to submit a review
